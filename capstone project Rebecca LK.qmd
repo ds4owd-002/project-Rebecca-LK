@@ -1,0 +1,20 @@
+---
+title: "index.qmd"
+format: html
+editor: visual
+---
+
+## Project goals
+
+Project would be more interesting comparing baseline and endline data...
+
+This data is endline data about WASH issues - how much water people use, source of water, handwashing practices, defecation practices, water availability, etc. I will look at responses by categories, such as demographics, membership in a WASH group and regional district, to see if certain groups have more barriers (water not clean, water further away) and better/worse WASH practices.
+
+```{r}
+library(tidyverse)
+library(readxl)
+```
+
+```{r}
+read_xlsx(here::here("data/raw/Final Baseline and_HwiseSatisfaction to upload.xlsx"))
+```

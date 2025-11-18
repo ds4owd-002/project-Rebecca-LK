@@ -18,3 +18,22 @@ library(readxl)
 ```{r}
 read_xlsx(here::here("data/raw/Final Baseline and_HwiseSatisfaction to upload.xlsx"))
 ```
+
+```{r}
+library(tidyverse)
+library(here)
+
+raw_data <- read_xlsx(here::here("data/raw/Final Baseline and_HwiseSatisfaction to upload.xlsx"))
+
+#will rename remaining columns in Excel
+
+processed_data <- raw_data # |>
+#  select(column1, column2, column3) |>
+#  filter(!is.na(column1)) |>
+#  rename(new_name = old_name)
+
+write_csv(processed_data,
+          here::here("data/processed/baseline.csv"))
+
+
+```

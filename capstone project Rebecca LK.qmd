@@ -1,39 +1,144 @@
 ---
-title: "index.qmd"
+title: "Capstone project: HWISE WASH data from Bangladesh"
+author: "Rebecca Laes-Kushner"
 format: html
 editor: visual
+source: charity:water
+date: today
+output: 
+  html_document:
+  toc: true
+  toc_depth: 2
+code_fold: true
+#bibliography: ref.bib
 ---
 
-## Project goals
+# Introduction
 
-Project would be more interesting comparing baseline and endline data...
+This project analyses baseline data from a water, sanitation and hygiene (WASH) project in Bangladesh run by charity:water. The survey asks about access to water, water issues, handwashing practices and defecation (pooping) practices.
 
-This data is endline data about WASH issues - how much water people use, source of water, handwashing practices, defecation practices, water availability, etc. I will look at responses by categories, such as demographics, membership in a WASH group and regional district, to see if certain groups have more barriers (water not clean, water further away) and better/worse WASH practices.
+I analyzed responses by categories, such as town (upzila), to see if certain groups have more barriers (water not clean, water further away) and better/worse WASH practices.
+
+# Methods
+
+## Libraries
 
 ```{r}
+install.packages("tidyverse")
+install.packages('here')
+install.packages('readxl')
+install.packages('gt')
+install.packages('dplyr')
+install.packages('knitr')
+library(here)
 library(tidyverse)
 library(readxl)
+library(gt)
+library(dplyr)
+library(knitr)
 ```
+
+## Data import
 
 ```{r}
-read_xlsx(here::here("data/raw/Final Baseline and_HwiseSatisfaction to upload.xlsx"))
+raw <- read_excel(
+  here::here("data/raw/Final Baseline and_HwiseSatisfaction to upload raw.xlsx"),
+  na = c("", "NA", "N/A", "."))
+
+raw <- raw %>%
+  mutate(
+    across(where(is.integer), ~ replace(.x, is.na(.x), 0L)),
+    across(where(is.double),  ~ replace(.x, is.na(.x), 0))
+  )
+
+
 ```
+
+## Prepare data
 
 ```{r}
-library(tidyverse)
-library(here)
 
-raw_data <- read_xlsx(here::here("data/raw/Final Baseline and_HwiseSatisfaction to upload.xlsx"))
+processed <- raw |>
 
-#will rename remaining columns in Excel
+#anonymize towns
+mutate(upazila = case_when(
+    upazila == "Koyra"      ~ "Upazila A",
+    upazila == "Morrelganj" ~ "Upazila B",
+    TRUE                    ~ "Upazila C"
+))|>
+  
+#avg time to get water - all
+  mutate(avg_time_get_water= round(mean(total_time_to_get_water, na.rm = TRUE)),3) |>
+    relocate(avg_time_get_water, .after=total_time_to_get_water) |>
 
-processed_data <- raw_data # |>
-#  select(column1, column2, column3) |>
-#  filter(!is.na(column1)) |>
-#  rename(new_name = old_name)
+#total water per household, per capita
+  mutate(total_water=(((num_25L_filled*25)+(num_20L_filled*20)+(num_15L_filled*15)+(num_10L_filled*10)+(num_5L_filled*5)))) |>
+      relocate(total_water, .after=other_containers) |>
+    mutate(water_per_cap=round(total_water/num_hh_members,2))|>
+      relocate(water_per_cap, .after=total_water)
+ 
+#break out water issues by town
+avg_by_upazila <- processed |>
+    group_by(upazila) |>
+  summarize(
+    avg_time_upazila = round(mean(total_time_to_get_water, na.rm = TRUE), 1),
+    avg_water_upazila = round(mean(water_per_cap, na.rm=TRUE),1),
+    median_water_upazila = round(median(water_per_cap, na.rm=TRUE),1),
+    min_water_upazila = min(water_per_cap, na.rm=TRUE),
+    max_water_upazila = round(max(water_per_cap, na.rm=TRUE),1)
+  )
 
-write_csv(processed_data,
-          here::here("data/processed/baseline.csv"))
+#summarize when wash hands by gender
+cols <- c("when_wash_hands_after_poop","when_wash_hands_after_clean_baby","when_wash_hands_before_cook","when_wash_hands_before_eat",         "when_wash_hands_before_feed_child","when_wash_hands_before_pray","when_wash_hands_after_working_in_dirt")
+
+wash_by_gender <- processed %>%
+  group_by(gender) %>%
+  summarise(
+    n = n(),
+      across(all_of(cols), ~ sum(.x, na.rm = TRUE),
+                  .names = "sum_{.col}") %>%
+  mutate(
+  across(starts_with("sum_"), ~ round(.x / n, 1), .names = "pct_{.col}")
+) %>%
+  rename_with(~ sub("^pct_sum_", "pct_", .), starts_with("pct_")) %>%
+  ungroup()
+)
 
 
 ```
+
+# Results
+
+Table @tbl-avg-by-upazila2 shows that time spent collecting water daily, upazila C spends about 26% less time (42 minutes) than upazilas A and B, who both spend about 57 minutes. Interestingly, residents in upazila C also collect less water on average per day - almost half of what residents collect in upazila A on average. The median amount of water that Upazila C residents collect is approximately twice as much what residents in the other two upazilas collect daily, with a maximum value that is roughly five times upazila A's maximum value and over twice the maximum value of upazila B.
+
+```{r}
+#table by upazila
+
+avg_by_upazila |>
+  gt() |>
+  fmt_number(columns=c(avg_time_upazila,avg_water_upazila,median_water_upazila,min_water_upazila,max_water_upazila)) |>
+  fmt_number(columns = avg_time_upazila:max_water_upazila, decimals = 1) |>
+  
+cols_label(
+  avg_time_upazila = "avg time",
+  avg_water_upazila = "avg water",
+  median_water_upazila = "median water",
+  min_water_upazila = "minimum water",
+  max_water_upazila = "maximum water"
+) |>
+  
+tab_header(
+  title=md("By upazila, time to collect water and amount of water (l) collected daily")
+  )
+
+#| label: tbl-avg-by-upazila2
+#| tbl-cap: "average by upazila"
+avg_by_upazila |>
+    kable(digits = 1)
+
+
+```
+
+# Conclusions
+
+# References

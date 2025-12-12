@@ -1,25 +1,20 @@
 README
 General information
 
-    Title of Dataset: Finel Baseline and_HwiseSatisfaction to upload.xlsx
+    Title of Dataset: Final Baseline and_HwiseSatisfaction to upload.xlsx
 
-    Author Information charity:water
+    Author Information: Rebecca Laes-Kushner is a consultant to NGOs and companies with a social mission
 
 Author A
 
     First name: Rebecca
     Surname: Laes-Kushner
-    ORCID iD
-    Email:
-
-
-etc.
+    ORCID iD: 0009-0004-0497-6016
+    Email: policy@laeskushner.net
 
     Date of data collection (single date, range, approximate date): unknown
-
     Geographic location of data collection: Bangladesh
-
-    Information about funding sources that supported the collection of the data: unknown
+    Information about funding sources that supported the collection of the data: data supplied by charity:water
 
 Sharing / access information
 
@@ -45,7 +40,7 @@ Methodological information
 
     Environmental/experimental conditions: n/a
 
-    Describe any quality-assurance procedures performed on the data:
+    Describe any quality-assurance procedures performed on the data: none - assumed data is correct
 
     People involved with sample collection, processing, analysis and/or submission:
     

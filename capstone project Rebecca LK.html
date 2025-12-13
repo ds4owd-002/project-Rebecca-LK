@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Rebecca Laes-Kushner">
-<meta name="dcterms.date" content="2025-12-12">
+<meta name="dcterms.date" content="2025-12-13">
 
 <title>Capstone project: HWISE WASH data from Bangladesh</title>
 <style>
@@ -101,7 +101,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">December 12, 2025</p>
+      <p class="date">December 13, 2025</p>
     </div>
   </div>
   
@@ -153,11 +153,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>Installing package into '/cloud/lib/x86_64-pc-linux-gnu-library/4.5'
 (as 'lib' is unspecified)</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"ggplot2"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Installing package into '/cloud/lib/x86_64-pc-linux-gnu-library/4.5'
+(as 'lib' is unspecified)</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"ggthemes"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Installing package into '/cloud/lib/x86_64-pc-linux-gnu-library/4.5'
+(as 'lib' is unspecified)</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>((<span class="st">"scales"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Installing package into '/cloud/lib/x86_64-pc-linux-gnu-library/4.5'
+(as 'lib' is unspecified)</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>here() starts at /cloud/project</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
 ✔ dplyr     1.1.4     ✔ readr     2.1.6
@@ -172,117 +187,142 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 ✖ dplyr::lag()    masks stats::lag()
 ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gt)</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gt)</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggthemes)</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scales)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'scales'
+
+The following object is masked from 'package:purrr':
+
+    discard
+
+The following object is masked from 'package:readr':
+
+    col_factor</code></pre>
+</div>
 </div>
 </section>
 <section id="data-import" class="level2">
 <h2 class="anchored" data-anchor-id="data-import">Data import</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>raw <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"data/raw/Final Baseline and_HwiseSatisfaction to upload raw.xlsx"</span>),</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">na =</span> <span class="fu">c</span>(<span class="st">""</span>, <span class="st">"NA"</span>, <span class="st">"N/A"</span>, <span class="st">"."</span>))</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>raw <span class="ot">&lt;-</span> raw <span class="sc">%&gt;%</span></span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">across</span>(<span class="fu">where</span>(is.integer), <span class="sc">~</span> <span class="fu">replace</span>(.x, <span class="fu">is.na</span>(.x), <span class="dv">0</span>L)),</span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">across</span>(<span class="fu">where</span>(is.double),  <span class="sc">~</span> <span class="fu">replace</span>(.x, <span class="fu">is.na</span>(.x), <span class="dv">0</span>))</span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>raw <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"data/raw/Final Baseline and_HwiseSatisfaction to upload raw.xlsx"</span>),</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">na =</span> <span class="fu">c</span>(<span class="st">""</span>, <span class="st">"NA"</span>, <span class="st">"N/A"</span>, <span class="st">"."</span>))</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>raw <span class="ot">&lt;-</span> raw <span class="sc">%&gt;%</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">across</span>(<span class="fu">where</span>(is.integer), <span class="sc">~</span> <span class="fu">replace</span>(.x, <span class="fu">is.na</span>(.x), <span class="dv">0</span>L)),</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">across</span>(<span class="fu">where</span>(is.double),  <span class="sc">~</span> <span class="fu">replace</span>(.x, <span class="fu">is.na</span>(.x), <span class="dv">0</span>))</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="prepare-data" class="level2">
 <h2 class="anchored" data-anchor-id="prepare-data">Prepare data</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>processed <span class="ot">&lt;-</span> raw <span class="sc">|&gt;</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co">#anonymize towns</span></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(<span class="at">upazila =</span> <span class="fu">case_when</span>(</span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>    upazila <span class="sc">==</span> <span class="st">"Koyra"</span>      <span class="sc">~</span> <span class="st">"Upazila A"</span>,</span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>    upazila <span class="sc">==</span> <span class="st">"Morrelganj"</span> <span class="sc">~</span> <span class="st">"Upazila B"</span>,</span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>    <span class="cn">TRUE</span>                    <span class="sc">~</span> <span class="st">"Upazila C"</span></span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>))<span class="sc">|&gt;</span></span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="co">#avg time to get water - all</span></span>
-<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">avg_time_get_water=</span> <span class="fu">round</span>(<span class="fu">mean</span>(total_time_to_get_water, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)),<span class="dv">3</span>) <span class="sc">|&gt;</span></span>
-<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">relocate</span>(avg_time_get_water, <span class="at">.after=</span>total_time_to_get_water) <span class="sc">|&gt;</span></span>
-<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a><span class="co">#total water per household, per capita</span></span>
-<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">total_water=</span>(((num_25L_filled<span class="sc">*</span><span class="dv">25</span>)<span class="sc">+</span>(num_20L_filled<span class="sc">*</span><span class="dv">20</span>)<span class="sc">+</span>(num_15L_filled<span class="sc">*</span><span class="dv">15</span>)<span class="sc">+</span>(num_10L_filled<span class="sc">*</span><span class="dv">10</span>)<span class="sc">+</span>(num_5L_filled<span class="sc">*</span><span class="dv">5</span>)))) <span class="sc">|&gt;</span></span>
-<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>      <span class="fu">relocate</span>(total_water, <span class="at">.after=</span>other_containers) <span class="sc">|&gt;</span></span>
-<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">water_per_cap=</span><span class="fu">round</span>(total_water<span class="sc">/</span>num_hh_members,<span class="dv">2</span>))<span class="sc">|&gt;</span></span>
-<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>      <span class="fu">relocate</span>(water_per_cap, <span class="at">.after=</span>total_water)</span>
-<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a> </span>
-<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a><span class="co">#break out water issues by town</span></span>
-<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a>avg_by_upazila <span class="ot">&lt;-</span> processed <span class="sc">|&gt;</span></span>
-<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(upazila) <span class="sc">|&gt;</span></span>
-<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
-<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">avg_time_upazila =</span> <span class="fu">round</span>(<span class="fu">mean</span>(total_time_to_get_water, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="dv">1</span>),</span>
-<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">avg_water_upazila =</span> <span class="fu">round</span>(<span class="fu">mean</span>(water_per_cap, <span class="at">na.rm=</span><span class="cn">TRUE</span>),<span class="dv">1</span>),</span>
-<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">median_water_upazila =</span> <span class="fu">round</span>(<span class="fu">median</span>(water_per_cap, <span class="at">na.rm=</span><span class="cn">TRUE</span>),<span class="dv">1</span>),</span>
-<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">min_water_upazila =</span> <span class="fu">min</span>(water_per_cap, <span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
-<span id="cb20-28"><a href="#cb20-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">max_water_upazila =</span> <span class="fu">round</span>(<span class="fu">max</span>(water_per_cap, <span class="at">na.rm=</span><span class="cn">TRUE</span>),<span class="dv">1</span>)</span>
-<span id="cb20-29"><a href="#cb20-29" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb20-30"><a href="#cb20-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-31"><a href="#cb20-31" aria-hidden="true" tabindex="-1"></a><span class="co">#summarize when wash hands by gender</span></span>
-<span id="cb20-32"><a href="#cb20-32" aria-hidden="true" tabindex="-1"></a>cols <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"when_wash_hands_after_poop"</span>,<span class="st">"when_wash_hands_after_clean_baby"</span>,<span class="st">"when_wash_hands_before_cook"</span>,<span class="st">"when_wash_hands_before_eat"</span>,         <span class="st">"when_wash_hands_before_feed_child"</span>,<span class="st">"when_wash_hands_before_pray"</span>,<span class="st">"when_wash_hands_after_working_in_dirt"</span>)</span>
-<span id="cb20-33"><a href="#cb20-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-34"><a href="#cb20-34" aria-hidden="true" tabindex="-1"></a>wash_by_gender <span class="ot">&lt;-</span> processed <span class="sc">%&gt;%</span></span>
-<span id="cb20-35"><a href="#cb20-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(gender) <span class="sc">%&gt;%</span></span>
-<span id="cb20-36"><a href="#cb20-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb20-37"><a href="#cb20-37" aria-hidden="true" tabindex="-1"></a>    <span class="at">n =</span> <span class="fu">n</span>(),</span>
-<span id="cb20-38"><a href="#cb20-38" aria-hidden="true" tabindex="-1"></a>      <span class="fu">across</span>(<span class="fu">all_of</span>(cols), <span class="sc">~</span> <span class="fu">sum</span>(.x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb20-39"><a href="#cb20-39" aria-hidden="true" tabindex="-1"></a>                  <span class="at">.names =</span> <span class="st">"sum_{.col}"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb20-40"><a href="#cb20-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb20-41"><a href="#cb20-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">across</span>(<span class="fu">starts_with</span>(<span class="st">"sum_"</span>), <span class="sc">~</span> <span class="fu">round</span>(.x <span class="sc">/</span> n, <span class="dv">1</span>), <span class="at">.names =</span> <span class="st">"pct_{.col}"</span>)</span>
-<span id="cb20-42"><a href="#cb20-42" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
-<span id="cb20-43"><a href="#cb20-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename_with</span>(<span class="sc">~</span> <span class="fu">sub</span>(<span class="st">"^pct_sum_"</span>, <span class="st">"pct_"</span>, .), <span class="fu">starts_with</span>(<span class="st">"pct_"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb20-44"><a href="#cb20-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
-<span id="cb20-45"><a href="#cb20-45" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>processed <span class="ot">&lt;-</span> raw <span class="sc">|&gt;</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="co">#anonymize towns</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(<span class="at">upazila =</span> <span class="fu">case_when</span>(</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>    upazila <span class="sc">==</span> <span class="st">"Koyra"</span>      <span class="sc">~</span> <span class="st">"Upazila A"</span>,</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>    upazila <span class="sc">==</span> <span class="st">"Morrelganj"</span> <span class="sc">~</span> <span class="st">"Upazila B"</span>,</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>    <span class="cn">TRUE</span>                    <span class="sc">~</span> <span class="st">"Upazila C"</span></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>))<span class="sc">|&gt;</span></span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a><span class="co">#avg time to get water - all</span></span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">avg_time_get_water=</span> <span class="fu">round</span>(<span class="fu">mean</span>(total_time_to_get_water, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)),<span class="dv">3</span>) <span class="sc">|&gt;</span></span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">relocate</span>(avg_time_get_water, <span class="at">.after=</span>total_time_to_get_water) <span class="sc">|&gt;</span></span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a><span class="co">#total water per household, per capita</span></span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">total_water=</span>(((num_25L_filled<span class="sc">*</span><span class="dv">25</span>)<span class="sc">+</span>(num_20L_filled<span class="sc">*</span><span class="dv">20</span>)<span class="sc">+</span>(num_15L_filled<span class="sc">*</span><span class="dv">15</span>)<span class="sc">+</span>(num_10L_filled<span class="sc">*</span><span class="dv">10</span>)<span class="sc">+</span>(num_5L_filled<span class="sc">*</span><span class="dv">5</span>)))) <span class="sc">|&gt;</span></span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>      <span class="fu">relocate</span>(total_water, <span class="at">.after=</span>other_containers) <span class="sc">|&gt;</span></span>
+<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">water_per_cap=</span><span class="fu">round</span>(total_water<span class="sc">/</span>num_hh_members,<span class="dv">2</span>))<span class="sc">|&gt;</span></span>
+<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a>      <span class="fu">relocate</span>(water_per_cap, <span class="at">.after=</span>total_water)</span>
+<span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb27-20"><a href="#cb27-20" aria-hidden="true" tabindex="-1"></a><span class="co">#break out water issues by town</span></span>
+<span id="cb27-21"><a href="#cb27-21" aria-hidden="true" tabindex="-1"></a>avg_by_upazila <span class="ot">&lt;-</span> processed <span class="sc">|&gt;</span></span>
+<span id="cb27-22"><a href="#cb27-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(upazila) <span class="sc">|&gt;</span></span>
+<span id="cb27-23"><a href="#cb27-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb27-24"><a href="#cb27-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">avg_time_upazila =</span> <span class="fu">round</span>(<span class="fu">mean</span>(total_time_to_get_water, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="dv">1</span>),</span>
+<span id="cb27-25"><a href="#cb27-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">avg_water_upazila =</span> <span class="fu">round</span>(<span class="fu">mean</span>(water_per_cap, <span class="at">na.rm=</span><span class="cn">TRUE</span>),<span class="dv">1</span>),</span>
+<span id="cb27-26"><a href="#cb27-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">median_water_upazila =</span> <span class="fu">round</span>(<span class="fu">median</span>(water_per_cap, <span class="at">na.rm=</span><span class="cn">TRUE</span>),<span class="dv">1</span>),</span>
+<span id="cb27-27"><a href="#cb27-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">min_water_upazila =</span> <span class="fu">min</span>(water_per_cap, <span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
+<span id="cb27-28"><a href="#cb27-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">max_water_upazila =</span> <span class="fu">round</span>(<span class="fu">max</span>(water_per_cap, <span class="at">na.rm=</span><span class="cn">TRUE</span>),<span class="dv">1</span>)</span>
+<span id="cb27-29"><a href="#cb27-29" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb27-30"><a href="#cb27-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-31"><a href="#cb27-31" aria-hidden="true" tabindex="-1"></a><span class="co">#summarize when wash hands by gender</span></span>
+<span id="cb27-32"><a href="#cb27-32" aria-hidden="true" tabindex="-1"></a>cols <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"when_wash_hands_after_poop"</span>,<span class="st">"when_wash_hands_after_clean_baby"</span>,<span class="st">"when_wash_hands_before_cook"</span>,<span class="st">"when_wash_hands_before_eat"</span>,         <span class="st">"when_wash_hands_before_feed_child"</span>,<span class="st">"when_wash_hands_before_pray"</span>,<span class="st">"when_wash_hands_after_working_in_dirt"</span>)</span>
+<span id="cb27-33"><a href="#cb27-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-34"><a href="#cb27-34" aria-hidden="true" tabindex="-1"></a>wash_by_gender <span class="ot">&lt;-</span> processed <span class="sc">%&gt;%</span></span>
+<span id="cb27-35"><a href="#cb27-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(gender) <span class="sc">%&gt;%</span></span>
+<span id="cb27-36"><a href="#cb27-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb27-37"><a href="#cb27-37" aria-hidden="true" tabindex="-1"></a>    <span class="at">n =</span> <span class="fu">n</span>(),</span>
+<span id="cb27-38"><a href="#cb27-38" aria-hidden="true" tabindex="-1"></a>      <span class="fu">across</span>(<span class="fu">all_of</span>(cols), <span class="sc">~</span> <span class="fu">sum</span>(.x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb27-39"><a href="#cb27-39" aria-hidden="true" tabindex="-1"></a>                  <span class="at">.names =</span> <span class="st">"sum_{.col}"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb27-40"><a href="#cb27-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb27-41"><a href="#cb27-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">across</span>(<span class="fu">starts_with</span>(<span class="st">"sum_"</span>), <span class="sc">~</span> <span class="fu">round</span>(.x <span class="sc">/</span> n, <span class="dv">1</span>), <span class="at">.names =</span> <span class="st">"pct_{.col}"</span>)</span>
+<span id="cb27-42"><a href="#cb27-42" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb27-43"><a href="#cb27-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename_with</span>(<span class="sc">~</span> <span class="fu">sub</span>(<span class="st">"^pct_sum_"</span>, <span class="st">"pct_"</span>, .), <span class="fu">starts_with</span>(<span class="st">"pct_"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb27-44"><a href="#cb27-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb27-45"><a href="#cb27-45" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb27-46"><a href="#cb27-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-47"><a href="#cb27-47" aria-hidden="true" tabindex="-1"></a><span class="co">#pivot to long</span></span>
+<span id="cb27-48"><a href="#cb27-48" aria-hidden="true" tabindex="-1"></a>wash_by_gender2 <span class="ot">&lt;-</span> <span class="fu">subset</span>(wash_by_gender, <span class="at">select=</span><span class="fu">c</span>(gender,pct_when_wash_hands_after_poop<span class="sc">:</span>pct_when_wash_hands_after_working_in_dirt)) </span>
+<span id="cb27-49"><a href="#cb27-49" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb27-50"><a href="#cb27-50" aria-hidden="true" tabindex="-1"></a>wash_by_gender2 <span class="ot">&lt;-</span> <span class="fu">rename</span>(wash_by_gender2,<span class="at">after_poop=</span>pct_when_wash_hands_after_poop,  <span class="at">after_clean_baby =</span> pct_when_wash_hands_after_clean_baby, <span class="at">before_cook=</span>pct_when_wash_hands_before_cook, <span class="at">before_eat=</span>pct_when_wash_hands_before_eat, <span class="at">before_feed_child=</span>pct_when_wash_hands_before_feed_child, <span class="at">before_pray=</span>pct_when_wash_hands_before_pray, <span class="at">after_work_in_dirt=</span>pct_when_wash_hands_after_working_in_dirt)</span>
+<span id="cb27-51"><a href="#cb27-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-52"><a href="#cb27-52" aria-hidden="true" tabindex="-1"></a>wash_by_gender2_long <span class="ot">&lt;-</span> wash_by_gender2 <span class="sc">|&gt;</span></span>
+<span id="cb27-53"><a href="#cb27-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols=</span>after_poop<span class="sc">:</span>after_work_in_dirt,</span>
+<span id="cb27-54"><a href="#cb27-54" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span><span class="st">"activity"</span>,</span>
+<span id="cb27-55"><a href="#cb27-55" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to=</span><span class="st">"value"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 </section>
 <section id="results" class="level1">
 <h1>Results</h1>
-<p>Table <strong>?@tbl-avg-by-upazila2</strong> shows that time spent collecting water daily, upazila C spends about 26% less time (42 minutes) than upazilas A and B, who both spend about 57 minutes. Interestingly, residents in upazila C also collect less water on average per day - almost half of what residents collect in upazila A on average. The median amount of water that Upazila C residents collect is approximately twice as much what residents in the other two upazilas collect daily, with a maximum value that is roughly five times upazila A’s maximum value and over twice the maximum value of upazila B.</p>
+<p>Table <strong>?@tbl-avg-by-upazila</strong> shows that time spent collecting water daily, upazila C spends about 26% less time (42 minutes) than upazilas A and B, who both spend about 57 minutes. Interestingly, residents in upazila C also collect less water on average per day - almost half of what residents collect in upazila A on average. The median amount of water that Upazila C residents collect is approximately twice as much what residents in the other two upazilas collect daily, with a maximum value that is roughly five times upazila A’s maximum value and over twice the maximum value of upazila B.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co">#table by upazila</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>avg_by_upazila <span class="sc">|&gt;</span></span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">|&gt;</span></span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fmt_number</span>(<span class="at">columns=</span><span class="fu">c</span>(avg_time_upazila,avg_water_upazila,median_water_upazila,min_water_upazila,max_water_upazila)) <span class="sc">|&gt;</span></span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fmt_number</span>(<span class="at">columns =</span> avg_time_upazila<span class="sc">:</span>max_water_upazila, <span class="at">decimals =</span> <span class="dv">1</span>) <span class="sc">|&gt;</span></span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="fu">cols_label</span>(</span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">avg_time_upazila =</span> <span class="st">"avg time"</span>,</span>
-<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">avg_water_upazila =</span> <span class="st">"avg water"</span>,</span>
-<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">median_water_upazila =</span> <span class="st">"median water"</span>,</span>
-<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">min_water_upazila =</span> <span class="st">"minimum water"</span>,</span>
-<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">max_water_upazila =</span> <span class="st">"maximum water"</span></span>
-<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
-<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a><span class="fu">tab_header</span>(</span>
-<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">title=</span><span class="fu">md</span>(<span class="st">"By upazila, time to collect water and amount of water (l) collected daily"</span>)</span>
-<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co">#table by upazila</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>avg_by_upazila <span class="sc">|&gt;</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">|&gt;</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fmt_number</span>(<span class="at">columns=</span><span class="fu">c</span>(avg_time_upazila,avg_water_upazila,median_water_upazila,min_water_upazila,max_water_upazila)) <span class="sc">|&gt;</span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fmt_number</span>(<span class="at">columns =</span> avg_time_upazila<span class="sc">:</span>max_water_upazila, <span class="at">decimals =</span> <span class="dv">1</span>) <span class="sc">|&gt;</span></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a><span class="fu">cols_label</span>(</span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">avg_time_upazila =</span> <span class="st">"avg time"</span>,</span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">avg_water_upazila =</span> <span class="st">"avg water"</span>,</span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">median_water_upazila =</span> <span class="st">"median water"</span>,</span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">min_water_upazila =</span> <span class="st">"minimum water"</span>,</span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">max_water_upazila =</span> <span class="st">"maximum water"</span></span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
+<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a><span class="fu">tab_header</span>(</span>
+<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">title=</span><span class="fu">md</span>(<span class="st">"By upazila, time to collect water and amount of water (l) collected daily"</span>)</span>
+<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="odqijojozm" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#odqijojozm table {
+<div id="arqrbqalaq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#arqrbqalaq table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#odqijojozm thead, #odqijojozm tbody, #odqijojozm tfoot, #odqijojozm tr, #odqijojozm td, #odqijojozm th {
+#arqrbqalaq thead, #arqrbqalaq tbody, #arqrbqalaq tfoot, #arqrbqalaq tr, #arqrbqalaq td, #arqrbqalaq th {
   border-style: none;
 }
 
-#odqijojozm p {
+#arqrbqalaq p {
   margin: 0;
   padding: 0;
 }
 
-#odqijojozm .gt_table {
+#arqrbqalaq .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -308,12 +348,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-left-color: #D3D3D3;
 }
 
-#odqijojozm .gt_caption {
+#arqrbqalaq .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#odqijojozm .gt_title {
+#arqrbqalaq .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -325,7 +365,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-width: 0;
 }
 
-#odqijojozm .gt_subtitle {
+#arqrbqalaq .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -337,7 +377,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-width: 0;
 }
 
-#odqijojozm .gt_heading {
+#arqrbqalaq .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -349,13 +389,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#odqijojozm .gt_bottom_border {
+#arqrbqalaq .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#odqijojozm .gt_col_headings {
+#arqrbqalaq .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -370,7 +410,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#odqijojozm .gt_col_heading {
+#arqrbqalaq .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -390,7 +430,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#odqijojozm .gt_column_spanner_outer {
+#arqrbqalaq .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -402,15 +442,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 4px;
 }
 
-#odqijojozm .gt_column_spanner_outer:first-child {
+#arqrbqalaq .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#odqijojozm .gt_column_spanner_outer:last-child {
+#arqrbqalaq .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#odqijojozm .gt_column_spanner {
+#arqrbqalaq .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -422,11 +462,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   width: 100%;
 }
 
-#odqijojozm .gt_spanner_row {
+#arqrbqalaq .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#odqijojozm .gt_group_heading {
+#arqrbqalaq .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -452,7 +492,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   text-align: left;
 }
 
-#odqijojozm .gt_empty_group_heading {
+#arqrbqalaq .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -467,15 +507,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: middle;
 }
 
-#odqijojozm .gt_from_md > :first-child {
+#arqrbqalaq .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#odqijojozm .gt_from_md > :last-child {
+#arqrbqalaq .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#odqijojozm .gt_row {
+#arqrbqalaq .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -494,7 +534,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#odqijojozm .gt_stub {
+#arqrbqalaq .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -507,7 +547,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#odqijojozm .gt_stub_row_group {
+#arqrbqalaq .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -521,15 +561,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: top;
 }
 
-#odqijojozm .gt_row_group_first td {
+#arqrbqalaq .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#odqijojozm .gt_row_group_first th {
+#arqrbqalaq .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#odqijojozm .gt_summary_row {
+#arqrbqalaq .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -539,16 +579,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#odqijojozm .gt_first_summary_row {
+#arqrbqalaq .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#odqijojozm .gt_first_summary_row.thick {
+#arqrbqalaq .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#odqijojozm .gt_last_summary_row {
+#arqrbqalaq .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -558,7 +598,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#odqijojozm .gt_grand_summary_row {
+#arqrbqalaq .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -568,7 +608,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#odqijojozm .gt_first_grand_summary_row {
+#arqrbqalaq .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -578,7 +618,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-color: #D3D3D3;
 }
 
-#odqijojozm .gt_last_grand_summary_row_top {
+#arqrbqalaq .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -588,11 +628,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#odqijojozm .gt_striped {
+#arqrbqalaq .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#odqijojozm .gt_table_body {
+#arqrbqalaq .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -601,7 +641,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#odqijojozm .gt_footnotes {
+#arqrbqalaq .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -615,7 +655,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#odqijojozm .gt_footnote {
+#arqrbqalaq .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -624,7 +664,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#odqijojozm .gt_sourcenotes {
+#arqrbqalaq .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -638,7 +678,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#odqijojozm .gt_sourcenote {
+#arqrbqalaq .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -646,72 +686,72 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#odqijojozm .gt_left {
+#arqrbqalaq .gt_left {
   text-align: left;
 }
 
-#odqijojozm .gt_center {
+#arqrbqalaq .gt_center {
   text-align: center;
 }
 
-#odqijojozm .gt_right {
+#arqrbqalaq .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#odqijojozm .gt_font_normal {
+#arqrbqalaq .gt_font_normal {
   font-weight: normal;
 }
 
-#odqijojozm .gt_font_bold {
+#arqrbqalaq .gt_font_bold {
   font-weight: bold;
 }
 
-#odqijojozm .gt_font_italic {
+#arqrbqalaq .gt_font_italic {
   font-style: italic;
 }
 
-#odqijojozm .gt_super {
+#arqrbqalaq .gt_super {
   font-size: 65%;
 }
 
-#odqijojozm .gt_footnote_marks {
+#arqrbqalaq .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#odqijojozm .gt_asterisk {
+#arqrbqalaq .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#odqijojozm .gt_indent_1 {
+#arqrbqalaq .gt_indent_1 {
   text-indent: 5px;
 }
 
-#odqijojozm .gt_indent_2 {
+#arqrbqalaq .gt_indent_2 {
   text-indent: 10px;
 }
 
-#odqijojozm .gt_indent_3 {
+#arqrbqalaq .gt_indent_3 {
   text-indent: 15px;
 }
 
-#odqijojozm .gt_indent_4 {
+#arqrbqalaq .gt_indent_4 {
   text-indent: 20px;
 }
 
-#odqijojozm .gt_indent_5 {
+#arqrbqalaq .gt_indent_5 {
   text-indent: 25px;
 }
 
-#odqijojozm .katex-display {
+#arqrbqalaq .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#odqijojozm div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#arqrbqalaq div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -760,10 +800,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </div>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: tbl-avg-by-upazila2</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| tbl-cap: "average by upazila"</span></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>avg_by_upazila <span class="sc">|&gt;</span></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: tbl-avg-by-upazila</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| tbl-cap: "average by upazila"</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>avg_by_upazila <span class="sc">|&gt;</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
 <colgroup>
@@ -811,6 +851,40 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 </tbody>
 </table>
+</div>
+</div>
+<p>As <strong>?@fig-wash-by-gender</strong> shows, both men and women almost universally wash their hands after defecating. The majority wash their hands before eating and after doing manual labor. However, only smaller percentages of either gender wash their hands before feeding a child or after cleaning a baby. The areas with large gender differences - before cooking and before praying - may be due to gender norms in the culture - women are likely the cooks in the household and in Islam, it is men who go to the mosque five times a day to pray.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co">#graph - when wash hands by gender</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-wash-by-gender</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="co">#| tbl-cap: "When people wash their hands, by gender"</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>label_map <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">"after_poop"</span>            <span class="ot">=</span> <span class="st">"after poop"</span>,</span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">"after_clean_baby"</span>      <span class="ot">=</span> <span class="st">"after clean baby"</span>,</span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">"before_cook"</span>           <span class="ot">=</span> <span class="st">"before cook"</span>,</span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">"before_eat"</span>            <span class="ot">=</span> <span class="st">"before eat"</span>,</span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">"before_feed_child"</span>     <span class="ot">=</span> <span class="st">"before feed child"</span>,</span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>  <span class="st">"before_pray"</span>           <span class="ot">=</span> <span class="st">"before pray"</span>,</span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>  <span class="st">"after_work_in_dirt"</span>    <span class="ot">=</span> <span class="st">"after work in dirt"</span></span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(wash_by_gender2_long,<span class="fu">aes</span>(<span class="at">fill=</span>gender, <span class="at">x=</span>activity, <span class="at">y=</span>value))<span class="sc">+</span><span class="fu">geom_bar</span>(<span class="at">position=</span><span class="st">"dodge"</span>, <span class="at">stat=</span><span class="st">"identity"</span>)<span class="sc">+</span> </span>
+<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">labels =</span> <span class="cf">function</span>(x) {</span>
+<span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a>    mapped <span class="ot">&lt;-</span> label_map[x]</span>
+<span id="cb30-18"><a href="#cb30-18" aria-hidden="true" tabindex="-1"></a>    mapped[<span class="fu">is.na</span>(mapped)] <span class="ot">&lt;-</span> x[<span class="fu">is.na</span>(mapped)]</span>
+<span id="cb30-19"><a href="#cb30-19" aria-hidden="true" tabindex="-1"></a>    scales<span class="sc">::</span><span class="fu">label_wrap</span>(<span class="dv">13</span>)(mapped)</span>
+<span id="cb30-20"><a href="#cb30-20" aria-hidden="true" tabindex="-1"></a>  })  <span class="sc">+</span></span>
+<span id="cb30-21"><a href="#cb30-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> </span>
+<span id="cb30-22"><a href="#cb30-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values=</span><span class="fu">c</span>(<span class="st">"#1CB027"</span>,</span>
+<span id="cb30-23"><a href="#cb30-23" aria-hidden="true" tabindex="-1"></a>                             <span class="st">"#F78E37"</span>))<span class="sc">+</span></span>
+<span id="cb30-24"><a href="#cb30-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"When people wash hands, by gender"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="capstone-project-Rebecca-LK_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>

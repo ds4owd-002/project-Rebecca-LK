@@ -1,17 +1,19 @@
 ---
 title: "Capstone project: HWISE WASH data from Bangladesh"
 author: "Rebecca Laes-Kushner"
-format: html
-output:
-  html_document:
+format: 
+  html:
     toc: true
     code-fold: true
 editor: visual
 source: charity:water
 date: today
 license: "CC BY"
-warning: FALSE
+execute:
+  warning: false
 bibliography: references.bib
+editor_options: 
+  chunk_output_type: console
 ---
 
 # Introduction
@@ -31,15 +33,6 @@ Access to clean water and sanitation remain challenges in Bangladesh. 70 million
 ## Libraries
 
 ```{r}
-install.packages("tidyverse")
-install.packages('here')
-install.packages('readxl')
-install.packages('gt')
-install.packages('dplyr')
-install.packages('knitr')
-install.packages("ggplot2")
-install.packages("ggthemes")
-install.packages(("scales"))
 library(here)
 library(tidyverse)
 library(readxl)
@@ -110,10 +103,15 @@ avg_by_upazila <- processed |>
 ##count water sources by upazila
 water_by_upazila <- processed %>%
   group_by(upazila) %>%
-  count(primary_source) 
+  count(primary_source) |> 
+  rename(value = n) 
 
-water_by_upazila <-
-  rename(water_by_upazila, value=n)
+water_by_upazila_percent <- processed %>%
+  group_by(upazila) %>%
+  count(primary_source) |> 
+  rename(value = n) |> 
+  mutate(percent = round(value / sum(value) * 100, 1)) 
+
 
 #doesn't work
 #original<-c("Borehole with handpump",'Bottled water, sachet water','Presure sand filter', 'Public tap or standpipe','Rainwater collection', 'body of water/river/etc.', "other")
@@ -133,6 +131,8 @@ upazila_n <- processed %>%
   mutate(primary_source = "n")
 
 
+
+
 water_by_upazila2 <- rbind(water_by_upazila, upazila_n)
 
 
@@ -146,14 +146,15 @@ water_by_upazila_wide <- water_by_upazila2 %>%
   
 
 #percents - doesn't work
-#water_by_upazila_wide2 <- water_by_upazila_wide %>%
+
+# water_by_upazila_wide %>%
 #   summarise(
 #    n = n(),
 #      across(all_of(cols), ~ sum(.x, na.rm = TRUE),
-#                  .names = "sum_{.col}") %>%
+#                  .names = "sum_{.col}")) %>%
 #  mutate(
 #  across([#need to figure out how to input these columns: [,2:8], ~ round(.x / n, 1), .names = "pct_{.col}")
-#) %>%
+# ) %>%
 #  rename_with(~ sub("^pct_sum_", "pct_", .), starts_with("pct_")) %>%
 #  ungroup()
 
@@ -198,13 +199,16 @@ wash_by_gender2_long <- wash_by_gender2 |>
 Table @tbl-avg-by-upazila shows that time spent collecting water daily, people in Paikgacha spend about 26% less time (42 minutes) than upazilas Koyra and Morrelganj, who both spend about 57 minutes. Interestingly, residents in Paikgacha also collect less water on average per day - almost half of what residents collect in Koyra on average. The median amount of water that Paikgacha residents collect is approximately twice as much what residents in the other two upazilas collect daily, with a maximum value that is roughly five times Koyra's maximum value and over twice the maximum value of Morrelganj.
 
 ```{r}
+#| label: tbl-avg-by-upazila
+#| tbl-cap: "average by upazila"
+
 #table by upazila
 
 avg_by_upazila |>
   gt() |>
   fmt_number(columns=c(avg_time_upazila,avg_water_upazila,median_water_upazila,min_water_upazila,max_water_upazila)) |>
   fmt_number(columns = avg_time_upazila:max_water_upazila, decimals = 1) |>
-  
+
 cols_label(
   avg_time_upazila = "avg time",
   avg_water_upazila = "avg water",
@@ -212,27 +216,23 @@ cols_label(
   min_water_upazila = "minimum water",
   max_water_upazila = "maximum water"
 ) |>
-  
+
 tab_header(
   title=md("By upazila, time to collect water and amount of water (l) collected daily"),
 )
 
-#| label: tbl-avg-by-upazila
-#| tbl-cap: "average by upazila"
-avg_by_upazila |>
-    kable(digits = 1)
 
 
-  
 ```
 
 @fig-water-by-upzila shows the primary source of water for residents in the three upzilas. The vast majority of respondents in Koyra get their water from handpumps, while only a few in the other two upazilas do. Responses from Paikgacha are split between boreholes, bottled water and bodies of water such as lakes and rivers. In Morrelganj, bodies of water are the most common water source.
 
 ```{r}
-#graph - source of water by upazila
 #| label: fig-water-by-upzila
-#| tbl-cap: "water source by upzila"
- 
+#| fig-cap: "water source by upzila"
+
+#graph - source of water by upazila
+
 label_map <- c(
   "Borehole_handpump" = "borehole with handpump",
   "Bottle_sachet" = "bottled water",
@@ -261,9 +261,10 @@ ggplot(aes(fill=upazila, x=primary_source, y=value))+geom_bar(position="dodge", 
 As @fig-wash-by-gender shows, both men and women almost universally wash their hands after defecating. The majority wash their hands before eating and after doing manual labor. However, only smaller percentages of either gender wash their hands before feeding a child or after cleaning a baby. The areas with large gender differences - before cooking and before praying - may be due to gender norms in the culture - women are likely the cooks in the household and in Islam, it is men who go to the mosque five times a day to pray.
 
 ```{r}
-#graph - when wash hands by gender
 #| label: fig-wash-by-gender
-#| tbl-cap: "When people wash their hands, by gender"
+#| fig-cap: "When people wash their hands, by gender"
+
+#graph - when wash hands by gender
 
 label_map <- c(
   "after_poop"            = "after poop",

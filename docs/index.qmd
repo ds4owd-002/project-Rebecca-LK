@@ -96,33 +96,14 @@ avg_by_upazila <- processed |>
     max_water_upazila = round(max(water_per_cap, na.rm=TRUE),1)
   )
 
-
-
 ##count water sources by upazila
 water_by_upazila <- processed %>%
   group_by(upazila) %>%
   count(primary_source) |>
   rename(value = n) |>
-  mutate(percent = round(value / sum(value) * 100, 1))
+  mutate(percent = round(value / sum(value) * 100, 1)) |> 
+  ungroup()
 
-##total n by upazila
-upazila_n <- processed %>%
-  group_by(upazila) %>%
-  count(upazila) %>%
-  mutate(primary_source = "n")
-
-
-water_by_upazila2 <- rbind(water_by_upazila, upazila_n)
-
-
-#this doesn't work (so I added "n" column to upazila_n instead, thus don't need this code)
-#water_by_upazila2 %>%
-#  ifelse(primary_source="NA","n",primary_source)
-
-water_by_upazila_wide <- water_by_upazila2 %>%
-  pivot_wider(names_from = primary_source, values_from = n) %>%
-  mutate(across(where(is.numeric), ~replace_na(., 0)))
-  
 
 ##summarize when wash hands by gender
 cols <- c("when_wash_hands_after_poop","when_wash_hands_after_clean_baby","when_wash_hands_before_cook","when_wash_hands_before_eat",         "when_wash_hands_before_feed_child","when_wash_hands_before_pray","when_wash_hands_after_working_in_dirt")
@@ -146,12 +127,10 @@ wash_by_gender2 <- subset(wash_by_gender, select=c(gender,pct_when_wash_hands_af
 wash_by_gender2 <- rename(wash_by_gender2,after_poop=pct_when_wash_hands_after_poop,  after_clean_baby = pct_when_wash_hands_after_clean_baby, before_cook=pct_when_wash_hands_before_cook, before_eat=pct_when_wash_hands_before_eat, before_feed_child=pct_when_wash_hands_before_feed_child, before_pray=pct_when_wash_hands_before_pray, after_work_in_dirt=pct_when_wash_hands_after_working_in_dirt)
 
 wash_by_gender2_long <- wash_by_gender2 |>
-  pivot_longer(cols=after_poop:after_work_in_dirt,
-               names_to ="activity",
-               values_to="value") 
-
-wash_by_gender2_long$value <- percent(wash_by_gender2_long$value, accuracy=1) 
-
+  pivot_longer(cols = after_poop:after_work_in_dirt,
+               names_to = "activity",
+               values_to = "value") |> 
+  mutate(value = value * 100)
   
 
 ```
@@ -191,28 +170,43 @@ tab_header(
 #| label: fig-water-by-upzila
 #| fig-cap: "water source by upzila"
 
+water_by_upazila_plot <- water_by_upazila |>
+  mutate(primary_source = case_when(
+    primary_source == "Borehole_handpump" ~ "borehole with handpump",
+    primary_source == "Bottle_sachet" ~ "bottled water",
+    primary_source == "Pressure_sand_filter" ~ "pressure sand filter",
+    primary_source == "Public_tap" ~ "public tap / standpipe",
+    primary_source == "Rain" ~ "Rainwater collection",
+    primary_source == "river_lake" ~ "river, lake, other",
+    primary_source == "other" ~ "other",
+    .default = primary_source
+  )) |> 
+  complete(upazila, primary_source, fill = list(value = 0, percent = 0))
+
+
 #graph - source of water by upazila 
-label_map <- c(
-  "Borehole_handpump" = "borehole with handpump",
-  "Bottle_sachet" = "bottled water",
-  "Pressure_sand_filter" = "pressure sand filter",
-  "Public_tap" = "public tap / standpipe",
-  "Rain"="Rainwater collection",
-  "river_lake" = "river, lake, other",
-  "other" = "other"
-    )
-  
-water_by_upazila |>
-ggplot(aes(fill=upazila, x=primary_source, y=percent))+geom_bar(position="dodge", stat="identity") + 
-  scale_x_discrete(labels = function(x) {
-    mapped <- label_map[x]
-    mapped[is.na(mapped)] <- x[is.na(mapped)]
-    scales::label_wrap(13)(mapped)
-  })  +
-  scale_fill_manual(values=c("#1CB027","#F78E37","#CC00FF"))+
+# label_map <- c(
+#   "Borehole_handpump" = "borehole with handpump",
+#   "Bottle_sachet" = "bottled water",
+#   "Pressure_sand_filter" = "pressure sand filter",
+#   "Public_tap" = "public tap / standpipe",
+#   "Rain"="Rainwater collection",
+#   "river_lake" = "river, lake, other",
+#   "other" = "other"
+#     )
+#   
+water_by_upazila_plot |>
+  ggplot(aes(fill = upazila, x = primary_source, y = percent)) +
+  geom_col(position = position_dodge()) +
+  scale_x_discrete(labels = scales::label_wrap(13)) +
+  scale_fill_manual(values = c("#1CB027", "#F78E37", "#CC00FF")) +
   ggtitle("Primary source of water by upazila") +
   xlab("primary source of water") +
-  geom_text(aes(label = value),position=position_dodge(.9),vjust=2,colour="black",size=4) +
+  geom_text(aes(label = value),
+            position = position_dodge(width = 0.9),
+            vjust = -0.5,
+            colour = "black",
+            size = 3) +
   theme_minimal()
 
 ```
@@ -223,28 +217,43 @@ As @fig-wash-by-gender shows, both men and women almost universally wash their h
 #| label: fig-wash-by-gender
 #| fig-cap: "When people wash their hands, by gender"
 
-#graph - when wash hands by gender
-label_map <- c(
-  "after_poop"            = "after poop",
-  "after_clean_baby"      = "after clean baby",
-  "before_cook"           = "before cook",
-  "before_eat"            = "before eat",
-  "before_feed_child"     = "before feed child",
-  "before_pray"           = "before pray",
-  "after_work_in_dirt"    = "after work in dirt"
-)
+# #graph - when wash hands by gender
+# label_map <- c(
+#   "after_poop"            = "after poop",
+#   "after_clean_baby"      = "after clean baby",
+#   "before_cook"           = "before cook",
+#   "before_eat"            = "before eat",
+#   "before_feed_child"     = "before feed child",
+#   "before_pray"           = "before pray",
+#   "after_work_in_dirt"    = "after work in dirt"
+# )
 
-wash_by_gender2_long |>
-ggplot(aes(fill=gender, x=activity, y=value))+geom_bar(position="dodge", stat="identity")+ 
-  scale_x_discrete(labels = function(x) {
-    mapped <- label_map[x]
-    mapped[is.na(mapped)] <- x[is.na(mapped)]
-    scales::label_wrap(13)(mapped)
-  })  +
-  scale_fill_manual(values=c("#1CB027",
-                             "#F78E37"))+
+# Prepare data with readable labels
+wash_by_gender_plot <- wash_by_gender2_long |>
+  mutate(activity = case_when(
+    activity == "after_poop" ~ "after poop",
+    activity == "after_clean_baby" ~ "after clean baby",
+    activity == "before_cook" ~ "before cook",
+    activity == "before_eat" ~ "before eat",
+    activity == "before_feed_child" ~ "before feed child",
+    activity == "before_pray" ~ "before pray",
+    activity == "after_work_in_dirt" ~ "after work in dirt",
+    .default = activity
+  )) 
+
+# Graph - when wash hands by gender
+wash_by_gender_plot |>
+  ggplot(aes(fill = gender, x = activity, y = value)) +
+  geom_col(position = position_dodge()) +
+  scale_x_discrete(labels = scales::label_wrap(13)) +
+  scale_y_continuous(labels = scales::label_percent(scale = 1)) +
+  scale_fill_manual(values = c("#1CB027", "#F78E37")) +
   ggtitle("When people wash hands, by gender") +
-  geom_text(aes(label = value),position=position_dodge(.9),vjust=2,colour="black",size=4) +
+  geom_text(aes(label = scales::percent(value, scale = 1, accuracy = 1)),
+            position = position_dodge(width = 0.9),
+            vjust = -0.5,
+            colour = "black",
+            size = 4) +
   theme_minimal() 
 
 
